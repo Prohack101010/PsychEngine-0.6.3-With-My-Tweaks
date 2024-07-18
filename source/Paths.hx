@@ -394,7 +394,8 @@ class Paths
 
 	#if MODS_ALLOWED
 	inline static public function mods(key:String = '') {
-		return SUtil.getPath() + 'mods/' + key;
+	    if (ClientPrefs.Modpack) { return SUtil.getPath() + 'modpack/' + key; }
+		if (!ClientPrefs.Modpack) { return SUtil.getPath() + 'mods/' + key; }
 	}
 
 	inline static public function modsFont(key:String) {
@@ -453,7 +454,8 @@ class Paths
 				return fileToCheck;
 
 		}
-		return SUtil.getPath() + 'mods/' + key;
+		if (ClientPrefs.Modpack) { return SUtil.getPath() + 'modpack/' + key; }
+		if (!ClientPrefs.Modpack) { return SUtil.getPath() + 'mods/' + key; }
 	}
 
 	public static var globalMods:Array<String> = [];

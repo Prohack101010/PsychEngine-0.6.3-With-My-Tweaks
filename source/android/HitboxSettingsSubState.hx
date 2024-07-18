@@ -108,6 +108,13 @@ class HitboxSettingsSubState extends BaseOptionsMenu
         option.onChange = onChangePadAlpha;
 		super();
 		
+		var option:Option = new Option('Modpack Folder',
+			'Wip',
+			'Modpack',
+			'bool',
+			false);
+		addOption(option);
+		
 		#if android
 		var option:Option = new Option('Storage Type:',
 			"Which folder Psych Engine should use?\n(CHANGING THIS MAKES DELETE YOUR OLD FOLDER!!)",
