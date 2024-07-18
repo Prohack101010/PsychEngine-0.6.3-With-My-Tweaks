@@ -117,7 +117,7 @@ class Character extends FlxSprite
 				if (!Assets.exists(path))
 				#end
 				{
-					path = Paths.getSharedPath('characters/' + DEFAULT_CHARACTER + '.json'); //If a character couldn't be found, change him to BF just to prevent a crash
+					path = SUtil.getPath('characters/' + DEFAULT_CHARACTER + '.json'); //If a character couldn't be found, change him to BF just to prevent a crash
 				}
 
 				try
@@ -189,7 +189,7 @@ class Character extends FlxSprite
 
 		// antialiasing
 		noAntialiasing = (json.no_antialiasing == true);
-		antialiasing = ClientPrefs.data.antialiasing ? !noAntialiasing : false;
+		antialiasing = ClientPrefs.globalAntialiasing ? !noAntialiasing : false;
 
 		// animations
 		animationsArray = json.animations;
@@ -243,7 +243,7 @@ class Character extends FlxSprite
 			specialAnim = false;
 			dance();
 		}
-		else if (animation.curAnim.name.endsWith('miss') && animation.curAnim.finished)
+		else if (animOffsets.exists('singLEFTmiss') && animation.curAnim.finished || animOffsets.exists('singDOWNmiss') && animation.curAnim.finished || animOffsets.exists('singUPmiss') && animation.curAnim.finished || animOffsets.exists('singRIGHTmiss') && animation.curAnim.finished)
 		{
 			dance();
 			animation.finish();
@@ -264,7 +264,7 @@ class Character extends FlxSprite
 				if(animation.curAnim.finished) playAnim(animation.curAnim.name, false, false, animation.curAnim.frames.length - 3);
 		}
 
-		if (animation.curAnim.name.startsWith('sing'))
+		if (animOffsets.exists('singLEFT') || animOffsets.exists('singDOWN') || animOffsets.exists('singUP') || animOffsets.exists('singRIGHT'))
 			holdTimer += elapsed;
 		else if(isPlayer)
 			holdTimer = 0;
@@ -317,6 +317,7 @@ class Character extends FlxSprite
 		}
 		else offset.set(0, 0);
 
+        /*
 		if (curCharacter.startsWith('gf-') || curCharacter == 'gf')
 		{
 			if (AnimName == 'singLEFT')
@@ -328,6 +329,7 @@ class Character extends FlxSprite
 			if (AnimName == 'singUP' || AnimName == 'singDOWN')
 				danced = !danced;
 		}
+		*/
 	}
 	
 	function loadMappedAnims():Void
