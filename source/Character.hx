@@ -5,7 +5,9 @@ import animateatlas.AtlasFrameMaker;
 import animation.PsychAnimationController;
 
 import flixel.util.FlxSort;
-// idk
+// *sigh* import every shit
+// amk herşeyi istiyo yaaaaa sikerim böyle işi herşeyi importliyom bana ama ram kullanımı artıyo deme uğraşamam o kadar düşük cihazlar umrumda değil -KralOyuncu (özlemişim bu ismi yazmayı bu arada)
+import animateatlas.AtlasFrameMaker;
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.addons.effects.FlxTrail;
@@ -13,10 +15,15 @@ import flixel.animation.FlxBaseAnimation;
 import flixel.graphics.frames.FlxAtlasFrames;
 import flixel.tweens.FlxTween;
 import flixel.util.FlxSort;
-
+import Section.SwagSection;
+#if MODS_ALLOWED
+import sys.io.File;
+import sys.FileSystem;
+#end
 import openfl.utils.AssetType;
 import openfl.utils.Assets;
 import haxe.Json;
+import haxe.format.JsonParser;
 
 import Song;
 import Section;
