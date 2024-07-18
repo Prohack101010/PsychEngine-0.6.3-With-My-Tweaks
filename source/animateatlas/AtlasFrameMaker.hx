@@ -16,7 +16,6 @@ import flixel.graphics.frames.FlxFrame;
 // bida aynı hatayı verirse delircem
 // bide seni ekliyorum git commitleri kendi hesabından yap benim hesaptan sen commit yapınca benim yaptığım işle senin yaptığın karışıyo
 // import everything
-package animateatlas;
 import flixel.util.FlxDestroyUtil;
 import openfl.geom.Rectangle;
 import flixel.math.FlxPoint;
