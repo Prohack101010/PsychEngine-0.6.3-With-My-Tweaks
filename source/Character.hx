@@ -2,9 +2,10 @@ package objects;
 
 import animateatlas.AtlasFrameMaker;
 
-import PsychAnimationController;
+import animation.PsychAnimationController;
 
 import flixel.util.FlxSort;
+import flixel.FlxSprite;
 
 import openfl.utils.AssetType;
 import openfl.utils.Assets;
