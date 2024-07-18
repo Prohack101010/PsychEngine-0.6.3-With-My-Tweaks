@@ -1,11 +1,18 @@
-package objects;
+package;
 
 import animateatlas.AtlasFrameMaker;
 
 import animation.PsychAnimationController;
 
 import flixel.util.FlxSort;
+// idk
+import flixel.FlxG;
 import flixel.FlxSprite;
+import flixel.addons.effects.FlxTrail;
+import flixel.animation.FlxBaseAnimation;
+import flixel.graphics.frames.FlxAtlasFrames;
+import flixel.tweens.FlxTween;
+import flixel.util.FlxSort;
 
 import openfl.utils.AssetType;
 import openfl.utils.Assets;
