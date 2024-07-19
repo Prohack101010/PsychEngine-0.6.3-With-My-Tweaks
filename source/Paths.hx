@@ -337,7 +337,7 @@ class Paths
 	{
 		var useMod = false;
 		var imageLoaded:FlxGraphic = image(key, library);
-		var myXml:Dynamic = getPreloadPath('images/$key.xml', TEXT);
+		var myXml:Dynamic = getPath('images/$key.xml', TEXT, library);
 		if(OpenFlAssets.exists(myXml) #if MODS_ALLOWED || (FileSystem.exists(myXml) && (useMod = true)) #end )
 		{
 			#if MODS_ALLOWED

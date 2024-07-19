@@ -113,7 +113,7 @@ class Character extends FlxSprite
 				if (!Assets.exists(path))
 				#end
 				{
-					path = SUtil.getPreloadPath('characters/bf.json');
+					path = Paths.getPreloadPath('characters/bf.json');
 				}
 
 				try
