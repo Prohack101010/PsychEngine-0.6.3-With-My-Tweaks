@@ -57,7 +57,7 @@ class FlxAnimateFilterRenderer
 		if (true)
 		{
 			var displayObject = FlxG.game;
-			var pixelRatio = FlxG.game.stage.__renderer.pixelRatio;
+			var pixelRatio = FlxG.game.stage.__renderer.__pixelRatio;
 
 			var offsetX = rect.x > 0 ? Math.ceil(rect.x) : Math.floor(rect.x);
 			var offsetY = rect.y > 0 ? Math.ceil(rect.y) : Math.floor(rect.y);
@@ -81,7 +81,7 @@ class FlxAnimateFilterRenderer
 			renderer.__worldTransform.ty -= offsetY;
 			renderer.__worldTransform.scale(pixelRatio, pixelRatio);
 
-			renderer.pixelRatio = pixelRatio;
+			renderer.__pixelRatio = pixelRatio;
 
 		}
 	}
