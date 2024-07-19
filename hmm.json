@@ -72,9 +72,8 @@
         {
             "name": "flxanimate",
             "type": "git",
-            "dir": null,
             "ref": "dev",
-            "url": "https://github.com/ShadowMario/flxanimate.git"
+            "url": "https://github.com/Prohack101010/flxanimate-0.6.3"
         },
         {
             "name": "hxCodec",
