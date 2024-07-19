@@ -33,6 +33,7 @@ jobs:
           haxelib setup ~/haxelib
           haxelib install hmm --quiet
           haxelib run hmm install --quiet
+          haxelib git flxanimate https://github.com/ShadowMario/flxanimate dev
       - name: Create Version Tag
         run: echo "${{github.run_id}}" > VERSION
 
@@ -89,6 +90,7 @@ jobs:
           haxelib setup ~/haxelib
           haxelib install hmm --quiet
           haxelib run hmm install --quiet
+          haxelib git flxanimate https://github.com/ShadowMario/flxanimate dev
       - name: Create Version Tag
         run: echo "${{github.run_id}}" > VERSION
 
