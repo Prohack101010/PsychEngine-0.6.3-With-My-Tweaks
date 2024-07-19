@@ -1,6 +1,5 @@
 package;
 
-import flxanimate.FlxAnimate;
 import flixel.util.FlxDestroyUtil;
 import flixel.FlxG;
 import flixel.FlxSprite;
@@ -99,7 +98,7 @@ class Character extends FlxSprite
 				#if MODS_ALLOWED
 				var path:String = Paths.modFolders(characterPath);
 				if (!FileSystem.exists(path)) {
-					path = Paths.getPreloadPath(characterPath);
+					path = SUtil.getPath() + Paths.getPreloadPath(characterPath);
 				}
 
 				if (!FileSystem.exists(path))
@@ -108,7 +107,7 @@ class Character extends FlxSprite
 				if (!Assets.exists(path))
 				#end
 				{
-					path = Paths.getPreloadPath('characters/' + DEFAULT_CHARACTER + '.json'); //If a character couldn't be found, change him to BF just to prevent a crash
+					path = SUtil.getPath() + Paths.getPreloadPath('characters/' + DEFAULT_CHARACTER + '.json'); //If a character couldn't be found, change him to BF just to prevent a crash
 				}
 
 				#if MODS_ALLOWED
@@ -118,17 +117,21 @@ class Character extends FlxSprite
 				#end
 
 				var json:CharacterFile = cast Json.parse(rawJson);
+				var useAtlas:Bool = false;
 				
 				isAnimateAtlas = false;
-
-        		var animToFind:String = Paths.getPath('images/' + json.image + '/Animation.json', TEXT);
+        
+        		#if flxanimate
+        		var animToFind:String = Paths.getPath('images/' + json.image + '/Animation.json', TEXT, null, true);
         		if (#if MODS_ALLOWED FileSystem.exists(animToFind) || #end Assets.exists(animToFind))
         			isAnimateAtlas = true;
+				#end
 
 				if(!isAnimateAtlas)
 					frames = Paths.getAtlas(json.image);
-				else
-				{
+				#if flxanimate
+        		else
+        		{
         			atlas = new FlxAnimate();
         			atlas.showPivot = false;
         			try
@@ -140,8 +143,9 @@ class Character extends FlxSprite
         				FlxG.log.warn('Could not load atlas ${json.image}: $e');
         			}
         		}
+        		#end
 
-				imageFile = json.image;
+                imageFile = json.image;
 				if(json.scale != 1) {
 					jsonScale = json.scale;
 					setGraphicSize(Std.int(width * jsonScale));
@@ -180,19 +184,23 @@ class Character extends FlxSprite
         					else
         						animation.addByPrefix(animAnim, animName, animFps, animLoop);
         				}
+        				#if flxanimate
         				else
         				{
         					if(animIndices != null && animIndices.length > 0)
         						atlas.anim.addBySymbolIndices(animAnim, animName, animIndices, animFps, animLoop);
         					else
         						atlas.anim.addBySymbol(animAnim, animName, animFps, animLoop);
-        				}
-        
+						}
+						#end
+
         				if(anim.offsets != null && anim.offsets.length > 1) addOffset(anim.anim, anim.offsets[0], anim.offsets[1]);
         				else addOffset(anim.anim, 0, 0);
-						}
+        			}
 				}
-				if(isAnimateAtlas) copyAtlasValues();
+				#if flxanimate
+        		if(isAnimateAtlas) copyAtlasValues();
+        		#end
 				//trace('Loaded file to character ' + curCharacter);
 		}
 		originalFlipX = flipX;
@@ -237,9 +245,7 @@ class Character extends FlxSprite
 
 	override function update(elapsed:Float)
 	{
-		if(isAnimateAtlas) atlas.update(elapsed);
-
-		if(debugMode || (!isAnimateAtlas && animation.curAnim == null) || (isAnimateAtlas && atlas.anim.curSymbol == null))
+		if(!debugMode && animation.curAnim != null)
 		{
 			if(heyTimer > 0)
 			{
@@ -448,6 +454,7 @@ class Character extends FlxSprite
 	// Atlas support
 	// special thanks ne_eo for the references, you're the goat!!
 	public var isAnimateAtlas:Bool = false;
+	#if flxanimate
 	public var atlas:FlxAnimate;
 	public override function draw()
 	{
@@ -494,4 +501,5 @@ class Character extends FlxSprite
 		if (atlas != null)
 			atlas = FlxDestroyUtil.destroy(atlas);
 	}
+	#end
 }
