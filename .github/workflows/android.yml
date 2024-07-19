@@ -49,6 +49,7 @@ jobs:
           haxelib set flixel 4.11.0
           haxelib set flixel-addons 2.11.0
           haxelib set hxcpp 4.2.1
+          haxelib set flxanimate git
         env:
           ANDROID_NDK_HOME: ${{ steps.setup-ndk.outputs.ndk-path }}
 
@@ -106,6 +107,7 @@ jobs:
           haxelib set flixel 4.11.0
           haxelib set flixel-addons 2.11.0
           haxelib set hxcpp 4.2.1
+          haxelib set flxanimate git
         env:
           ANDROID_NDK_HOME: ${{ steps.setup-ndk.outputs.ndk-path }}
 
