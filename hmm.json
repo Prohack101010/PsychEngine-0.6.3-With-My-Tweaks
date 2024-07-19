@@ -2,23 +2,24 @@
     "dependencies":[
         {
             "name":"lime",
-            "type":"haxelib",
-            "version":"7.9.0"
+            "type": "git",
+            "ref": "main",
+            "url": "https://github.com/MobilePorting/lime-0.6.3.git"
         },
         {
-            "name":"openfl",
-            "type":"haxelib",
-            "version":"9.2.0"
+            "name": "openfl",
+            "type": "haxelib",
+            "version": null
         },
         {
             "name":"flixel",
-            "type":"haxelib",
-            "version":"4.11.0"
+            "type": "haxelib",
+            "version": null
         },
         {
             "name":"flixel-addons",
-            "type":"haxelib",
-            "version":"2.11.0"
+            "type": "haxelib",
+            "version": null
         },
         {
             "name":"flixel-tools",
