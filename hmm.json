@@ -72,8 +72,8 @@
         {
             "name": "flxanimate",
             "type": "git",
-            "ref": "dev",
-            "url": "https://github.com/Prohack101010/flxanimate-0.6.3.git"
+            "ref": "master",
+            "url": "https://github.com/Dot-Stuff/flxanimate.git"
         },
         {
             "name": "hxCodec",
