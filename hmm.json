@@ -70,6 +70,13 @@
             "url":"https://github.com/Sirox228/linc_luajit"
         },
         {
+            "name": "flxanimate",
+            "type": "git",
+            "dir": null,
+            "ref": "dev",
+            "url": "https://github.com/ShadowMario/flxanimate.git"
+        },
+        {
             "name": "hxCodec",
             "type": "haxelib",
             "version": "2.5.1"
