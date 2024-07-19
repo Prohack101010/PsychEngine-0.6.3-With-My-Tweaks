@@ -337,6 +337,7 @@ class Character extends FlxSprite
 	}
 
 	public var animPaused(get, set):Bool;
+	/*
 	private function get_animPaused():Bool
 	{
 		if(isAnimationNull()) return false;
@@ -354,6 +355,7 @@ class Character extends FlxSprite
 
 		return value;
 	}
+	*/
 
 	public var danced:Bool = false;
 
