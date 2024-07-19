@@ -1,5 +1,6 @@
 package;
 
+import flxanimate.FlxAnimate;
 import animateatlas.AtlasFrameMaker;
 import flixel.FlxG;
 import flixel.FlxSprite;
@@ -120,12 +121,15 @@ class Character extends FlxSprite
 				
 				isAnimateAtlas = false;
 
+        		#if flxanimate
         		var animToFind:String = Paths.getPath('images/' + json.image + '/Animation.json', TEXT, null, true);
         		if (#if MODS_ALLOWED FileSystem.exists(animToFind) || #end Assets.exists(animToFind))
         			isAnimateAtlas = true;
+				#end
 
 				if(!isAnimateAtlas)
 					frames = Paths.getAtlas(json.image);
+			    #if flxanimate
 				else
 				{
         			atlas = new FlxAnimate();
@@ -139,6 +143,7 @@ class Character extends FlxSprite
         				FlxG.log.warn('Could not load atlas ${json.image}: $e');
         			}
         		}
+        		#end
 
 				imageFile = json.image;
 
@@ -181,6 +186,7 @@ class Character extends FlxSprite
         					else
         						animation.addByPrefix(animAnim, animName, animFps, animLoop);
         				}
+        				#if flxanimate
         				else
         				{
         					if(animIndices != null && animIndices.length > 0)
@@ -188,11 +194,14 @@ class Character extends FlxSprite
         					else
         						atlas.anim.addBySymbol(animAnim, animName, animFps, animLoop);
         				}
+        				#end
         
         				if(anim.offsets != null && anim.offsets.length > 1) addOffset(anim.anim, anim.offsets[0], anim.offsets[1]);
         				else addOffset(anim.anim, 0, 0);
 					}
+				#if flxanimate
         		if(isAnimateAtlas) copyAtlasValues();
+        		#end
 				}
 				//trace('Loaded file to character ' + curCharacter);
 		}
@@ -463,6 +472,7 @@ class Character extends FlxSprite
 	// Atlas support
 	// special thanks ne_eo for the references, you're the goat!!
 	public var isAnimateAtlas:Bool = false;
+	#if flxanimate
 	public var atlas:FlxAnimate;
 	public override function draw()
 	{
@@ -509,4 +519,5 @@ class Character extends FlxSprite
 		if (atlas != null)
 			atlas = FlxDestroyUtil.destroy(atlas);
 	}
+	#end
 }
