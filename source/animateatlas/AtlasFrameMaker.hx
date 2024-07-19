@@ -32,6 +32,11 @@ import flixel.graphics.frames.FlxFramesCollection;
 import flixel.graphics.frames.FlxFrame;
 import flixel.util.FlxColor;
 
+#if sys
+import sys.io.File;
+import sys.FileSystem;
+#end
+
 class AtlasFrameMaker extends FlxFramesCollection
 {
 	//public static var widthoffset:Int = 0;
@@ -62,7 +67,7 @@ class AtlasFrameMaker extends FlxFramesCollection
 		}
 
 		var animationData:AnimationData = Json.parse(Paths.getTextFromFile('images/$key/Animation.json'));
-		var atlasData:AtlasData = Json.parse(Paths.getTextFromFile('images/$key/spritemap.json').replace("\uFEFF", ""));
+		var atlasData:AtlasData = Json.parse(Paths.getTextFromFileAtlas('images/$key/spritemap.json').replace("\uFEFF", ""));
 
 		var graphic:FlxGraphic = getFlxGraphic('$key/spritemap');
 		//var graphic:FlxGraphic = Paths.image('$key/spritemap');

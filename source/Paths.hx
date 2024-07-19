@@ -238,6 +238,33 @@ class Paths
 		var returnAsset:FlxGraphic = returnGraphic(key, library);
 		return returnAsset;
 	}
+	
+	static public function getTextFromFileAtlas(key:String, ?ignoreMods:Bool = false):String
+	{
+		#if sys
+		#if MODS_ALLOWED
+		if (!ignoreMods && FileSystem.exists(modFolders(key)))
+			return File.getContent(modFolders(key));
+		#end
+
+		if (FileSystem.exists(getSharedPath(key)))
+			return File.getContent(getSharedPath(key));
+
+		if (currentLevel != null)
+		{
+			var levelPath:String = '';
+			if(currentLevel != 'shared') {
+				levelPath = getLibraryPathForce(key, 'week_assets', currentLevel);
+				if (FileSystem.exists(levelPath))
+					return File.getContent(levelPath);
+			}
+		}
+		#end
+		var path:String = getPath(key, TEXT);
+		if(OpenFlAssets.exists(path, TEXT)) return Assets.getText(path);
+		return null;
+	}
+	
 
 	static public function getTextFromFile(key:String, ?ignoreMods:Bool = false):String
 	{

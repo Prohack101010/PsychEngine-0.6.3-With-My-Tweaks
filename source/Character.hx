@@ -2,8 +2,6 @@ package;
 
 import animateatlas.AtlasFrameMaker;
 
-import animation.PsychAnimationController;
-
 import flixel.util.FlxSort;
 // *sigh* import every shit
 // amk herşeyi istiyo yaaaaa sikerim böyle işi herşeyi importliyom bana ama ram kullanımı artıyo deme uğraşamam o kadar düşük cihazlar umrumda değil -KralOyuncu (özlemişim bu ismi yazmayı bu arada)
@@ -59,13 +57,11 @@ class Character extends FlxSprite
 	/**
 	 * In case a character is missing, it will use this on its place
 	**/
-	public static final DEFAULT_CHARACTER:String = 'bf';
-
 	public var animOffsets:Map<String, Array<Dynamic>>;
 	public var debugMode:Bool = false;
 
 	public var isPlayer:Bool = false;
-	public var curCharacter:String = DEFAULT_CHARACTER;
+	public var curCharacter:String = 'bf';
 
 	public var colorTween:FlxTween;
 	public var holdTimer:Float = 0;
@@ -98,8 +94,6 @@ class Character extends FlxSprite
 	{
 		super(x, y);
 
-		animation = new PsychAnimationController(this);
-
 		animOffsets = new Map<String, Array<Dynamic>>();
 		curCharacter = character;
 		this.isPlayer = isPlayer;
@@ -110,14 +104,14 @@ class Character extends FlxSprite
 			default:
 				var characterPath:String = 'characters/$curCharacter.json';
 
-				var path:String = Paths.getPath(characterPath, TEXT, null, true);
+				var path:String = Paths.getPath(characterPath, TEXT);
 				#if MODS_ALLOWED
 				if (!FileSystem.exists(path))
 				#else
 				if (!Assets.exists(path))
 				#end
 				{
-					path = SUtil.getPath('characters/' + DEFAULT_CHARACTER + '.json'); //If a character couldn't be found, change him to BF just to prevent a crash
+					path = SUtil.getPath('characters/bf.json'); //If a character couldn't be found, change him to BF just to prevent a crash
 				}
 
 				try
