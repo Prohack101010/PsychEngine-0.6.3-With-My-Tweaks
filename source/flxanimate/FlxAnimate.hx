@@ -27,7 +27,6 @@ import flixel.math.FlxMatrix;
 import openfl.geom.ColorTransform;
 import flixel.math.FlxMath;
 import flixel.FlxBasic;
-import flixel.graphics.frames.FlxFramesCollection;
 
 typedef Settings = {
 	?ButtonSettings:Map<String, flxanimate.animate.FlxAnim.ButtonSettings>,
@@ -87,10 +86,6 @@ class FlxAnimate extends FlxSprite
 		return showPivot = v;
 	}
 
-	/**
-	 * Loads a regular atlas.
-	 * @param Path The path where the atlas is located. Must be the folder, **NOT** any of the contents of it! 
-	 */
 	public function loadAtlas(Path:String)
 	{
 		if (!Assets.exists('$Path/Animation.json') && haxe.io.Path.extension(Path) != "zip")
@@ -98,26 +93,8 @@ class FlxAnimate extends FlxSprite
 			FlxG.log.error('Animation file not found in specified path: "$path", have you written the correct path?');
 			return;
 		}
-		loadSeparateAtlas(atlasSetting(Path), FlxAnimateFrames.fromTextureAtlas(Path));
-	}
-
-	/**
-	 * Function in handy to load atlases that share same animation/frames but dont necessarily mean it comes together.
-	 * @param animation The animation file. This should be the content of the `JSON`, **NOT** the path of it.
-	 * @param frames The collection of frames.
-	 */
-	public function loadSeparateAtlas(?animation:String = null, ?frames:FlxFramesCollection = null)
-	{
-		if (frames != null)
-			this.frames = frames;
-		if (animation != null)
-		{
-			var json:AnimAtlas = haxe.Json.parse(animation);
-
-			anim._loadAtlas(json);
-		}
-		if (anim != null)
-			origin = anim.curInstance.symbol.transformationPoint;
+		anim._loadAtlas(atlasSetting(Path));
+		frames = FlxAnimateFrames.fromTextureAtlas(Path);
 	}
 	/**
 	 * the function `draw()` renders the symbol that `anim` has currently plus a pivot that you can toggle on or off.
@@ -253,7 +230,6 @@ class FlxAnimate extends FlxSprite
 		for (camera in cameras)
 		{
 			rMatrix.identity();
-			limb.prepareMatrix(rMatrix);
 			rMatrix.concat(_matrix);
 			if (!camera.visible || !camera.exists || !limbOnScreen(limb, _matrix, camera))
 				return;
@@ -404,18 +380,18 @@ class FlxAnimate extends FlxSprite
 		}
 	}
 
-	function atlasSetting(Path:String)
+	function atlasSetting(Path:String):AnimAtlas
 	{
-		var jsontxt:String = null;
+		var jsontxt:AnimAtlas = null;
 		if (haxe.io.Path.extension(Path) == "zip")
 		{
 			var thing = Zip.readZip(Assets.getBytes(Path));
-
+			
 			for (list in Zip.unzip(thing))
 			{
 				if (list.fileName.indexOf("Animation.json") != -1)
 				{
-					jsontxt = list.data.toString();
+					jsontxt = haxe.Json.parse(list.data.toString());
 					thing.remove(list);
 					continue;
 				}
@@ -424,7 +400,9 @@ class FlxAnimate extends FlxSprite
 			FlxAnimateFrames.zip = thing;
 		}
 		else
-			jsontxt = openfl.Assets.getText('$Path/Animation.json');
+		{
+			jsontxt = haxe.Json.parse(openfl.Assets.getText('$Path/Animation.json'));
+		}
 
 		return jsontxt;
 	}

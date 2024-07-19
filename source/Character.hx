@@ -1,6 +1,7 @@
 package;
 
 import flxanimate.FlxAnimate;
+import flixel.util.FlxDestroyUtil;
 import animateatlas.AtlasFrameMaker;
 import flixel.FlxG;
 import flixel.FlxSprite;
@@ -121,7 +122,7 @@ class Character extends FlxSprite
 				
 				isAnimateAtlas = false;
 
-        		var animToFind:String = Paths.getPath('images/' + json.image + '/Animation.json', TEXT, null, true);
+        		var animToFind:String = Paths.getPath('images/' + Paths.getPath + '/Animation.json', TEXT);
         		if (#if MODS_ALLOWED FileSystem.exists(animToFind) || #end Assets.exists(animToFind))
         			isAnimateAtlas = true;
 
@@ -274,7 +275,7 @@ class Character extends FlxSprite
 						playAnim('shoot' + noteData, true);
 						animationNotes.shift();
 					}
-					if(aisAnimationFinished()) playAnim(getAnimationName(), false, false, animation.curAnim.frames.length - 3);
+					if(isAnimationFinished()) playAnim(getAnimationName(), false, false, animation.curAnim.frames.length - 3);
 			}
 
 			if (!isPlayer)
