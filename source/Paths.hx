@@ -254,7 +254,7 @@ class Paths
 		{
 			var levelPath:String = '';
 			if(currentLevel != 'shared') {
-				levelPath = getLibraryPathForce(key, 'week_assets', currentLevel);
+				levelPath = getLibraryPathForce(key, currentLevel);
 				if (FileSystem.exists(levelPath))
 					return File.getContent(levelPath);
 			}
@@ -336,8 +336,8 @@ class Paths
 	static public function getAtlas(key:String, ?library:String = null, ?allowGPU:Bool = true):FlxAtlasFrames
 	{
 		var useMod = false;
-		var imageLoaded:FlxGraphic = image(key, library, allowGPU);
-		var myXml:Dynamic = getPath('images/$key.xml', TEXT, library, true);
+		var imageLoaded:FlxGraphic = image(key, library);
+		var myXml:Dynamic = getPreloadPath('images/$key.xml', TEXT);
 		if(OpenFlAssets.exists(myXml) #if MODS_ALLOWED || (FileSystem.exists(myXml) && (useMod = true)) #end )
 		{
 			#if MODS_ALLOWED
