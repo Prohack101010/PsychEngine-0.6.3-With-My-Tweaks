@@ -2,9 +2,8 @@
     "dependencies":[
         {
             "name":"lime",
-            "type": "git",
-            "ref": "main",
-            "url": "https://github.com/MobilePorting/lime-0.6.3.git"
+            "type": "haxelib",
+            "version": null
         },
         {
             "name": "openfl",
