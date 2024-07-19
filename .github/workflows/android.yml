@@ -31,6 +31,7 @@ jobs:
       - name: Install Haxelib
         run: |
           haxelib setup ~/haxelib
+          haxelib remove flxanimate
           haxelib install hmm --quiet
           haxelib run hmm install --quiet
           haxelib git flxanimate https://github.com/ShadowMario/flxanimate dev
@@ -89,6 +90,7 @@ jobs:
       - name: Install Haxelib
         run: |
           haxelib setup ~/haxelib
+          haxelib remove flxanimate
           haxelib install hmm --quiet
           haxelib run hmm install --quiet
           haxelib git flxanimate https://github.com/ShadowMario/flxanimate dev
