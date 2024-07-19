@@ -7,10 +7,8 @@
         },
         {
             "name":"openfl",
-            "type":"git",
-            "dir":null,
-            "ref":"develop",
-            "url":"https://github.com/Prohack101010/openfl-0.6.3"
+            "type":"haxelib",
+            "version":"9.1.0"
         },
         {
             "name":"flixel",
@@ -70,6 +68,13 @@
             "dir":null,
             "ref":"master",
             "url":"https://github.com/Sirox228/linc_luajit"
+        },
+        {
+            "name": "flxanimate",
+            "type": "git",
+            "dir": null,
+            "ref": "dev",
+            "url": "https://github.com/ShadowMario/flxanimate.git"
         },
         {
             "name": "hxCodec",
